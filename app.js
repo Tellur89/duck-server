@@ -17,7 +17,7 @@ app.get('/questions', (req, res) => {
 	res.send(questions);
 });
 
-app.get('questions/:id', (req, res) => {
+app.get('/questions/:id', (req, res) => {
 	const idx = Number(req.params.id);
 	const question = questions[idx - 1];
 
@@ -49,8 +49,9 @@ app.post('/questions', (req, res) => {
 
 // PATCH
 app.patch('/questions/:id', (req, res) => {
-	const id = req.params.id;
-	const question = questions.find((el) => (el.is = id));
+	const id = Number(req.params.id);
+	// id = Number(id);
+	const question = questions.find((el) => (el.id = id));
 
 	if (question === undefined) {
 		return res.status(404).send({ Error: 'Question does not exist' });
