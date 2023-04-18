@@ -1,4 +1,93 @@
 [
 	{
+
+		"question": "What is the capital city of Canada?",
+		"answer1": "Toronto",
+		"answer2": "Montreal",
+		"answer3": "Vancouver",
+		"answer4": "Ottawa",
+		"ansIndex": 4,
+		"id": 1
+	},
+	{
+		"question": "Which country is the largest in the world by area?",
+		"answer1": "China",
+		"answer2": "Russia",
+		"answer3": "United States",
+		"answer4": "Brazil",
+		"ansIndex": 2,
+		"id": 2
+	},
+	{
+		"question": "What is the highest mountain in Africa?",
+		"answer1": "Mount Kilimanjaro",
+		"answer2": "Mount Everest",
+		"answer3": "Mount Aconcagua",
+		"answer4": "Mount Fuji",
+		"ansIndex": 1,
+		"id": 3
+	},
+	{
+		"question": "Which country is both a continent and a country?",
+		"answer1": "Australia",
+		"answer2": "South Africa",
+		"answer3": "Canada",
+		"answer4": "Japan",
+		"ansIndex": 1,
+		"id": 4
+	},
+	{
+		"question": "What is the largest river in South America?",
+		"answer1": "Amazon River",
+		"answer2": "Nile River",
+		"answer3": "Mississippi River",
+		"answer4": "Yangtze River",
+		"ansIndex": 1,
+		"id": 5
+	},
+	{
+		"question": "Which ocean is the largest in the world?",
+		"answer1": "Atlantic Ocean",
+		"answer2": "Indian Ocean",
+		"answer3": "Southern Ocean",
+		"answer4": "Pacific Ocean",
+		"ansIndex": 4,
+		"id": 6
+	},
+	{
+		"question": "Which country is known as the Land of the Rising Sun?",
+		"answer1": "China",
+		"answer2": "South Korea",
+		"answer3": "Japan",
+		"answer4": "Taiwan",
+		"ansIndex": 3,
+		"id": 7
+	},
+	{
+		"question": "What is the capital city of Australia?",
+		"answer1": "Sydney",
+		"answer2": "Melbourne",
+		"answer3": "Brisbane",
+		"answer4": "Canberra",
+		"ansIndex": 4,
+		"id": 8
+	},
+	{
+		"question": "Which country is both in Europe and Asia?",
+		"answer1": "Kazakhstan",
+		"answer2": "Azerbaijan",
+		"answer3": "Russia",
+		"answer4": "Turkey",
+		"ansIndex": 4,
+		"id": 9
+	},
+	{
+		"question": "What is the currency of Japan?",
+		"answer1": "Yen",
+		"answer2": "Won",
+		"answer3": "Peso",
+		"answer4": "Euro",
+		"ansIndex": 1,
+		"id": 10
 	}
 ]
