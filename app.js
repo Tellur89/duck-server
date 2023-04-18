@@ -29,3 +29,17 @@ app.get('questions/:id', (req, res) => {
 		  })
 		: res.send(question);
 });
+
+// POST
+app.post('/questions', (req, res) => {
+	const question = questions.find((el) => el.question === req.body.question);
+
+	if (question !== undefined) {
+		res.status(409).json({ Error: 'Question already exist' });
+	} else {
+		const newQuestion = req.body;
+		newQuestion.id = questions.length + 1;
+		questions.push(newQuestion);
+		res.status(201).send(newQuestion);
+	}
+});
