@@ -8,8 +8,6 @@ app.use(cors());
 app.use(express.json());
 // ------
 
-module.exports = app;
-
 // GET
 app.get('/', (req, res) => {
 	res.sendFile('./index.html');
@@ -39,7 +37,33 @@ app.post('/questions', (req, res) => {
 	} else {
 		const newQuestion = req.body;
 		newQuestion.id = questions.length + 1;
+
+		// ADD readFile and writeFile
+		//
+		//
+
 		questions.push(newQuestion);
 		res.status(201).send(newQuestion);
 	}
 });
+
+// PATCH
+app.patch('/questions/:id', (req, res) => {
+	const id = req.params.id;
+	const question = questions.find((el) => (el.is = id));
+
+	if (question === undefined) {
+		return res.status(404).send({ Error: 'Question does not exist' });
+	}
+
+	try {
+		const updateQuestion = { ...req.body, id: question.id };
+		const idx = questions.findIndex((el) => el.id === question.id);
+		questions[idx] = updateQuestion;
+		res.send(updateQuestion);
+	} catch (err) {
+		res.status(400).send('Could not update it');
+	}
+});
+
+module.exports = app;
