@@ -10,7 +10,7 @@ app.use(express.json());
 
 // GET
 app.get('/', (req, res) => {
-	res.sendFile('./index.html');
+	res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/questions', (req, res) => {
