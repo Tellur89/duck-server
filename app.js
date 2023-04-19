@@ -81,26 +81,43 @@ app.post('/questions/:category', (req, res) => {
 // PATCH
 app.patch('/questions/:category/:id', (req, res) => {
   const category = req.params.category
-  const addNewCategories = questions[category]
-  const id = Number(req.params.id)
-  const newID = addNewCategories[id]
+  const updateNewQuestions = questions[category]
+  const idToUpdate = Number(req.params.id)
+  // const newID = updateNewQuestions[id - 1]
 
-  const question = addNewCategories.find((el) => (el.id = newID))
+  const question = updateNewQuestions.find((el) => el.id === idToUpdate)
+  console.log(question)
 
-  if (question === undefined) {
+  if (!question) {
     return res.status(404).send({ Error: 'Question does not exist' })
-  }
-
-  try {
-    const updateQuestion = { ...req.body, id: newID.id - 1 }
-    const idx = addNewCategories.findIndex((el) => el.id === question.id)
-    addNewCategories[idx] = updateQuestion
-    res.send(updateQuestion)
-  } catch (err) {
-    res.status(400).send('Could not update it')
+  } else {
+    try {
+      const updateQuestion = { ...req.body, id: idToUpdate }
+      const idx = updateNewQuestions.findIndex((el) => el.id === question.id)
+      updateNewQuestions[idx] = updateQuestion
+      res.send(updateQuestion)
+    } catch (err) {
+      res.status(400).send('Could not update it')
+    }
   }
 })
 
 // Delete
+
+app.delete('/questions/:category/:id', (req, res) => {
+  const category = req.params.category
+  const deleteCategories = questions[category]
+  const idToDelete = parseInt(req.params.id)
+
+  const deleteID = deleteCategories.find((item) => item.id === idToDelete)
+
+  if (!deleteID) {
+    res.status(404).send({ message: 'Question not found in the category' })
+  } else {
+    const indexToDelete = deleteCategories.indexOf(deleteID)
+    deleteCategories.splice(indexToDelete, 1)
+    res.status(204).send()
+  }
+})
 
 module.exports = app
