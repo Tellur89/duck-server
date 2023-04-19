@@ -72,7 +72,7 @@ app.post('/questions/:category', (req, res) => {
       JSON.stringify(updateFile),
       () => {
         console.log(JSON.stringify(newQuestion))
-        res.end()
+        
       }
     )
     res.status(201).send(newQuestion)
