@@ -1,12 +1,14 @@
 const express = require('express')
 const cors = require('cors')
 const questions = require('./src/json/questions.json')
+const logger = require('./src/js/functions/logger')
 
 const app = express()
 
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json())
+app.use(logger)
 // ------
 
 // GET
@@ -72,7 +74,7 @@ app.post('/questions/:category', (req, res) => {
 })
 
 // PATCH
-app.patch('/questions/:id', (req, res) => {
+app.patch('/questions', (req, res) => {
   const id = Number(req.params.id)
   // id = Number(id);
   const question = questions.find((el) => (el.id = id))
