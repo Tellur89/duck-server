@@ -72,7 +72,6 @@ app.post('/questions/:category', (req, res) => {
       JSON.stringify(updateFile),
       () => {
         console.log(JSON.stringify(newQuestion))
-        
       }
     )
     res.status(201).send(newQuestion)
@@ -84,9 +83,8 @@ app.patch('/questions/:category/:id', (req, res) => {
   const category = req.params.category
   const addNewCategories = questions[category]
   const id = Number(req.params.id)
-  const newID = addNewCategories[id - 1]
-  console.log(newID)
-  // id = Number(id);
+  const newID = addNewCategories[id]
+
   const question = addNewCategories.find((el) => (el.id = newID))
 
   if (question === undefined) {
@@ -94,8 +92,7 @@ app.patch('/questions/:category/:id', (req, res) => {
   }
 
   try {
-    const updateQuestion = { ...req.body, id: newID.id }
-    console.log(newID.id)
+    const updateQuestion = { ...req.body, id: newID.id - 1 }
     const idx = addNewCategories.findIndex((el) => el.id === question.id)
     addNewCategories[idx] = updateQuestion
     res.send(updateQuestion)
@@ -103,5 +100,7 @@ app.patch('/questions/:category/:id', (req, res) => {
     res.status(400).send('Could not update it')
   }
 })
+
+// Delete
 
 module.exports = app
