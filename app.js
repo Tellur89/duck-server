@@ -48,20 +48,22 @@ app.get("/questions/:category/:id", (req, res) => {
 })
 
 // POST
-app.post('/questions', (req, res) => {
-  const question = questions.find((el) => el.question === req.body.question)
+app.post('/questions/:category', (req, res) => {
+  const category = req.params.category
+  const categoryNewQuestion = questions[category]
+  const question = categoryNewQuestion.find((el) => el.question === req.body.question)
 
   if (question !== undefined) {
     res.status(409).json({ Error: 'Question already exist' })
   } else {
     const newQuestion = req.body
-    newQuestion.id = questions.length + 1
+    newQuestion.id = categoryNewQuestion.length + 1
 
     // ADD readFile and writeFile
     //
     //
 
-    questions.push(newQuestion)
+    categoryNewQuestion.push(newQuestion)
     res.status(201).send(newQuestion)
   }
 })
