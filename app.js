@@ -17,19 +17,34 @@ app.get('/questions', (req, res) => {
   res.send(questions)
 })
 
-app.get('/questions/history', (req, res) => {
-  res.send(questions.history)
-})
 
-app.get('/questions/:id', (req, res) => {
-  const idx = Number(req.params.id)
-  const question = questions[idx - 1]
+app.get("/questions/:category", (req, res) => {
+	const category = req.params.category
+	const questionCategory = questions[category]
+	// !question
+	//   ? res.status(404).json({
+	//       Error: "There is no question with the given ID",
+	//     })
+	//   :	res.send(question)
+	if (questionCategory === undefined) {
+		res.status(404).send("Error: There is no category with that name")
+	} else {res.send(questionCategory)}
+	
+  })
 
-  !question || typeof idx !== 'number'
-    ? res.status(404).json({
-        Error: 'There is no question with the given ID',
-      })
-    : res.send(question)
+app.get("/questions/:category/:id", (req, res) => {
+	const category = req.params.category
+	const questionCategory = questions[category]
+	if (questionCategory === undefined) {
+		res.status(404).send("Error: There is no category with that name")
+	}
+
+	const idx = Number(req.params.id)
+	const questionsId = questionCategory[idx-1]
+	if (questionsId === undefined) {
+		res.status(404).send("Error: There is no id with that name")
+	} else {res.send(questionsId)}
+
 })
 
 // POST
