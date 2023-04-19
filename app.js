@@ -51,6 +51,9 @@ app.get("/questions/:category/:id", (req, res) => {
 app.post('/questions/:category', (req, res) => {
   const category = req.params.category
   const categoryNewQuestion = questions[category]
+  if (categoryNewQuestion === undefined) {
+	res.status(404).send("Error: There is no category with that name")
+}
   const question = categoryNewQuestion.find((el) => el.question === req.body.question)
 
   if (question !== undefined) {
