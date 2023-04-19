@@ -2,9 +2,10 @@ const express = require('express')
 const cors = require('cors')
 const questions = require('./src/json/questions.json')
 const logger = require('./src/js/functions/logger')
+const fs = require('fs')
 
 const app = express()
-const fs = require("fs")
+
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json())
@@ -63,40 +64,40 @@ app.post('/questions/:category', (req, res) => {
   } else {
     const newQuestion = req.body
     newQuestion.id = categoryNewQuestion.length + 1
-
-    // ADD readFile and writeFile
-    //
-    //
-
-	
     categoryNewQuestion.push(newQuestion)
-	const updateFile = questions
-    
+    const updateFile = questions
 
-	fs.writeFile("./src/json/questions.json", JSON.stringify(updateFile), () => {
-		console.log(JSON.stringify(newQuestion))
-		res.end()
-	  })
-	res.status(201).send(newQuestion)
+    fs.writeFile(
+      './src/json/questions.json',
+      JSON.stringify(updateFile),
+      () => {
+        console.log(JSON.stringify(newQuestion))
+        res.end()
+      }
+    )
+    res.status(201).send(newQuestion)
   }
-
-
 })
 
 // PATCH
-app.patch('/questions', (req, res) => {
+app.patch('/questions/:category/:id', (req, res) => {
+  const category = req.params.category
+  const addNewCategories = questions[category]
   const id = Number(req.params.id)
+  const newID = addNewCategories[id - 1]
+  console.log(newID)
   // id = Number(id);
-  const question = questions.find((el) => (el.id = id))
+  const question = addNewCategories.find((el) => (el.id = newID))
 
   if (question === undefined) {
     return res.status(404).send({ Error: 'Question does not exist' })
   }
 
   try {
-    const updateQuestion = { ...req.body, id: question.id }
-    const idx = questions.findIndex((el) => el.id === question.id)
-    questions[idx] = updateQuestion
+    const updateQuestion = { ...req.body, id: newID.id }
+    console.log(newID.id)
+    const idx = addNewCategories.findIndex((el) => el.id === question.id)
+    addNewCategories[idx] = updateQuestion
     res.send(updateQuestion)
   } catch (err) {
     res.status(400).send('Could not update it')
