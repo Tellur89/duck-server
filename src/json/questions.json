@@ -1,5 +1,5 @@
 {
-  "history": [
+  "geography": [
     {
       "question": "What is the capital city of Canada?",
       "answer1": "Toronto",
@@ -91,7 +91,7 @@
       "id": 10
     }
   ],
-  "geography": [
+  "history": [
     {
       "question": "Which of these was the first ancient civilization to develop writing?",
       "answer1": "Ancient Egypt",
