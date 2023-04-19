@@ -3,6 +3,7 @@ const cors = require('cors')
 const questions = require('./src/json/questions.json')
 
 const app = express()
+const fs = require("fs")
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json())
@@ -66,9 +67,19 @@ app.post('/questions/:category', (req, res) => {
     //
     //
 
+	
     categoryNewQuestion.push(newQuestion)
-    res.status(201).send(newQuestion)
+	const updateFile = questions
+    
+
+	fs.writeFile("./src/json/questions.json", JSON.stringify(updateFile), () => {
+		console.log(JSON.stringify(newQuestion))
+		res.end()
+	  })
+	res.status(201).send(newQuestion)
   }
+
+
 })
 
 // PATCH
