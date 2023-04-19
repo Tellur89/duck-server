@@ -1,12 +1,14 @@
 const express = require('express')
 const cors = require('cors')
 const questions = require('./src/json/questions.json')
+const logger = require('./src/js/functions/logger')
 
 const app = express()
 const fs = require("fs")
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json())
+app.use(logger)
 // ------
 
 // GET
@@ -18,34 +20,31 @@ app.get('/questions', (req, res) => {
   res.send(questions)
 })
 
+app.get('/questions/:category', (req, res) => {
+  const category = req.params.category
+  const questionCategory = questions[category]
 
-app.get("/questions/:category", (req, res) => {
-	const category = req.params.category
-	const questionCategory = questions[category]
-	// !question
-	//   ? res.status(404).json({
-	//       Error: "There is no question with the given ID",
-	//     })
-	//   :	res.send(question)
-	if (questionCategory === undefined) {
-		res.status(404).send("Error: There is no category with that name")
-	} else {res.send(questionCategory)}
-	
-  })
+  if (questionCategory === undefined) {
+    res.status(404).send('Error: There is no category with that name')
+  } else {
+    res.send(questionCategory)
+  }
+})
 
-app.get("/questions/:category/:id", (req, res) => {
-	const category = req.params.category
-	const questionCategory = questions[category]
-	if (questionCategory === undefined) {
-		res.status(404).send("Error: There is no category with that name")
-	}
+app.get('/questions/:category/:id', (req, res) => {
+  const category = req.params.category
+  const questionCategory = questions[category]
+  if (questionCategory === undefined) {
+    res.status(404).send('Error: There is no category with that name')
+  }
 
-	const idx = Number(req.params.id)
-	const questionsId = questionCategory[idx-1]
-	if (questionsId === undefined) {
-		res.status(404).send("Error: There is no id with that name")
-	} else {res.send(questionsId)}
-
+  const idx = Number(req.params.id)
+  const questionsId = questionCategory[idx - 1]
+  if (questionsId === undefined) {
+    res.status(404).send('Error: There is no id with that name')
+  } else {
+    res.send(questionsId)
+  }
 })
 
 // POST
@@ -53,12 +52,14 @@ app.post('/questions/:category', (req, res) => {
   const category = req.params.category
   const categoryNewQuestion = questions[category]
   if (categoryNewQuestion === undefined) {
-	res.status(404).send("Error: There is no category with that name")
-}
-  const question = categoryNewQuestion.find((el) => el.question === req.body.question)
+    res.status(404).send('Error: There is no category with that name')
+  }
+  const question = categoryNewQuestion.find(
+    (el) => el.question === req.body.question
+  )
 
   if (question !== undefined) {
-    res.status(409).json({ Error: 'Question already exist' })
+    res.status(409).send({ Error: 'Question already exist' })
   } else {
     const newQuestion = req.body
     newQuestion.id = categoryNewQuestion.length + 1
@@ -83,7 +84,7 @@ app.post('/questions/:category', (req, res) => {
 })
 
 // PATCH
-app.patch('/questions/:id', (req, res) => {
+app.patch('/questions', (req, res) => {
   const id = Number(req.params.id)
   // id = Number(id);
   const question = questions.find((el) => (el.id = id))
