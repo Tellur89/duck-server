@@ -55,6 +55,7 @@ app.post('/questions/:category', (req, res) => {
   if (categoryNewQuestion === undefined) {
     res.status(404).send('Error: There is no category with that name')
   }
+
   const question = categoryNewQuestion.find(
     (el) => el.question === req.body.question
   )
@@ -83,10 +84,8 @@ app.patch('/questions/:category/:id', (req, res) => {
   const category = req.params.category
   const updateNewQuestions = questions[category]
   const idToUpdate = Number(req.params.id)
-  // const newID = updateNewQuestions[id - 1]
 
   const question = updateNewQuestions.find((el) => el.id === idToUpdate)
-  console.log(question)
 
   if (!question) {
     return res.status(404).send({ Error: 'Question does not exist' })
