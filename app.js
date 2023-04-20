@@ -39,23 +39,12 @@ app.get('/questions/:category', (req, res) => {
 
 app.get('/usernames/:username', (req, res) => {
   const username = req.params.username
-  // const enteredUsername = usernames[username]
-  let usernamesList = usernames.map(users => users.username)
-  console.log(usernamesList)
+  const user = usernames.find(userid => userid.username === username)
+  console.log(user)
   
-  for(i=0; i < usernamesList.length;i++){
-    if (usernamesList[i] === username){
-      res.send(usernames[i])
-    } 
-  } 
-
-
-
-  // if (enteredUsername === undefined) {
-  //   res.status(404).send('Error: There is no username with that name')
-  // } else {
-  //   res.send(enteredUsername)
-  // }
+  if (user === undefined) {
+    res.status(404).send("Error: Username not found")
+  } else {res.send(user)}
 })
 
 
@@ -76,6 +65,37 @@ app.get('/questions/:category/:id', (req, res) => {
 })
 
 // POST
+app.post('/questions/:category', (req, res) => {
+  const category = req.params.category
+  const categoryNewQuestion = questions[category]
+  if (categoryNewQuestion === undefined) {
+    res.status(404).send('Error: There is no category with that name')
+  }
+
+  const question = categoryNewQuestion.find(
+    (el) => el.question === req.body.question
+  )
+
+  if (question !== undefined) {
+    res.status(409).send({ Error: 'Question already exist' })
+  } else {
+    const newQuestion = req.body
+    newQuestion.id = categoryNewQuestion.length + 1
+    categoryNewQuestion.push(newQuestion)
+    const updateFile = questions
+
+    fs.writeFile(
+      './src/json/questions.json',
+      JSON.stringify(updateFile),
+      () => {
+        console.log(JSON.stringify(newQuestion))
+      }
+    )
+    res.status(201).send(newQuestion)
+  }
+})
+
+
 app.post('/questions/:category', (req, res) => {
   const category = req.params.category
   const categoryNewQuestion = questions[category]
