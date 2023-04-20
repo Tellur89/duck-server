@@ -27,7 +27,7 @@ app.get('/usernames', (req, res) => {
 })
 
 app.get('/questions/:category', (req, res) => {
-  const category = req.params.category
+  const category = (req.params.category).toLowerCase()
   // const questionCategory = questions[category]
   // if (questionCategory === undefined) {
   //   res.status(404).send('Error: There is no category with that name')
@@ -36,8 +36,12 @@ app.get('/questions/:category', (req, res) => {
   // }
   // const categoryQuestions = questions.forEach(question => printCategory(question,category))
   const categoryQuestions = questions.filter(question => question.category === category)
-  console.log(categoryQuestions)
+  // console.log(categoryQuestions.length)
+  if (categoryQuestions.length === 0) {
+    res.status(404).send('Error: There is no category with that name')
+  } else {
   res.send(categoryQuestions)
+  }
 })
 
 
@@ -55,17 +59,29 @@ app.get('/usernames/:username', (req, res) => {
 
 app.get('/questions/:category/:id', (req, res) => {
   const category = req.params.category
-  const questionCategory = questions[category]
-  if (questionCategory === undefined) {
+  // const questionCategory = questions[category]
+  // if (questionCategory === undefined) {
+  //   res.status(404).send('Error: There is no category with that name')
+  // }
+
+  // const idx = Number(req.params.id)
+  // const questionsId = questionCategory[idx - 1]
+  // if (questionsId === undefined) {
+  //   res.status(404).send('Error: There is no id with that name')
+  // } else {
+  //   res.send(questionsId)
+  // }
+  const categoryQuestions = questions.filter(question => question.category === category)
+  if (categoryQuestions.length === 0) {
     res.status(404).send('Error: There is no category with that name')
   }
 
   const idx = Number(req.params.id)
-  const questionsId = questionCategory[idx - 1]
-  if (questionsId === undefined) {
-    res.status(404).send('Error: There is no id with that name')
+  const questionId = categoryQuestions[idx - 1]
+  if (questionId === undefined){
+    res.status(404).send(`Error: Question number ${idx} does not exist`)
   } else {
-    res.send(questionsId)
+    res.send(questionId)
   }
 })
 
