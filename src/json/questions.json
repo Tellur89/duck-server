@@ -99,7 +99,8 @@
       "ansIndex": 1
     
     },
-    {
+    { 
+      "category": "history",
       "question": "Which of these was the first ancient civilization to develop writing?",
       "answer1": "Ancient Egypt",
       "answer2": "Mesopotamia",
@@ -108,7 +109,8 @@
       "ansIndex": 2
       
     },
-    {
+    { 
+      "category": "history",
       "question": "What was the main cause of the American Civil War?",
       "answer1": "States rights",
       "answer2": "Slavery",
@@ -118,6 +120,7 @@
     
     },
     {
+      "category": "history",
       "question": "Who was the first president of the United States?",
       "answer1": "John Adams",
       "answer2": "George Washington",
@@ -127,6 +130,7 @@
       
     },
     {
+      "category": "history",
       "question": "Who led the Russian Revolution in 1917?",
       "answer1": "Vladimir Lenin",
       "answer2": "Joseph Stalin",
@@ -136,6 +140,7 @@
     
     },
     {
+      "category": "history",
       "question": "Who was the first African American to become president of the United States?",
       "answer1": "Barack Obama",
       "answer2": "Colin Powell",
@@ -145,6 +150,7 @@
       
     },
     {
+      "category": "history",
       "question": "Which country was the first to launch a satellite into space?",
       "answer1": "United States",
       "answer2": "China",
@@ -154,6 +160,7 @@
       
     },
     {
+      "category": "history",
       "question": "Which famous scientist is known for developing the theory of relativity?",
       "answer1": "Isaac Newton",
       "answer2": "Albert Einstein",
@@ -163,6 +170,7 @@
       
     },
     {
+      "category": "history",
       "question": "Which of the following was a major cause of World War II?",
       "answer1": " The Cold War",
       "answer2": "The Industrial Revolution",
@@ -172,6 +180,7 @@
       
     },
     {
+      "category": "history",
       "question": "Which country did Christopher Columbus set sail from in 1492?",
       "answer1": "Spain",
       "answer2": "Portugal",
@@ -181,6 +190,7 @@
   
     },
     {
+      "category": "history",
       "question": "Which famous battle took place in 1066 and led to the Norman conquest of England?",
       "answer1": "Battle of Waterloo",
       "answer2": "Battle of Hastings",

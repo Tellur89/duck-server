@@ -27,15 +27,23 @@ app.get('/usernames', (req, res) => {
 })
 
 app.get('/questions/:category', (req, res) => {
-  const category = req.params.category
-  const questionCategory = questions[category]
-
-  if (questionCategory === undefined) {
+  const category = (req.params.category).toLowerCase()
+  // const questionCategory = questions[category]
+  // if (questionCategory === undefined) {
+  //   res.status(404).send('Error: There is no category with that name')
+  // } else {
+  //   res.send(questionCategory)
+  // }
+  // const categoryQuestions = questions.forEach(question => printCategory(question,category))
+  const categoryQuestions = questions.filter(question => question.category === category)
+  // console.log(categoryQuestions.length)
+  if (categoryQuestions.length === 0) {
     res.status(404).send('Error: There is no category with that name')
   } else {
-    res.send(questionCategory)
+  res.send(categoryQuestions)
   }
 })
+
 
 app.get('/usernames/:username', (req, res) => {
   const username = req.params.username
@@ -51,29 +59,45 @@ app.get('/usernames/:username', (req, res) => {
 
 app.get('/questions/:category/:id', (req, res) => {
   const category = req.params.category
-  const questionCategory = questions[category]
-  if (questionCategory === undefined) {
+  // const questionCategory = questions[category]
+  // if (questionCategory === undefined) {
+  //   res.status(404).send('Error: There is no category with that name')
+  // }
+
+  // const idx = Number(req.params.id)
+  // const questionsId = questionCategory[idx - 1]
+  // if (questionsId === undefined) {
+  //   res.status(404).send('Error: There is no id with that name')
+  // } else {
+  //   res.send(questionsId)
+  // }
+  const categoryQuestions = questions.filter(question => question.category === category)
+  if (categoryQuestions.length === 0) {
     res.status(404).send('Error: There is no category with that name')
   }
 
   const idx = Number(req.params.id)
-  const questionsId = questionCategory[idx - 1]
-  if (questionsId === undefined) {
-    res.status(404).send('Error: There is no id with that name')
+  const questionId = categoryQuestions[idx - 1]
+  if (questionId === undefined){
+    res.status(404).send(`Error: Question number ${idx} does not exist`)
   } else {
-    res.send(questionsId)
+    res.send(questionId)
   }
 })
 
 // POST
 app.post('/questions/:category', (req, res) => {
   const category = req.params.category
-  const categoryNewQuestion = questions[category]
-  if (categoryNewQuestion === undefined) {
+  // const categoryNewQuestion = questions[category]
+  // if (categoryNewQuestion === undefined) {
+  //   res.status(404).send('Error: There is no category with that name')
+  // }
+  const categoryNewQuestions = questions.filter(question => question.category === category)
+  if (categoryNewQuestions.length === 0) {
     res.status(404).send('Error: There is no category with that name')
   }
 
-  const question = categoryNewQuestion.find(
+  const question = categoryNewQuestions.find(
     (el) => el.question === req.body.question
   )
 
@@ -81,8 +105,9 @@ app.post('/questions/:category', (req, res) => {
     res.status(409).send({ Error: 'Question already exist' })
   } else {
     const newQuestion = req.body
-    newQuestion.id = categoryNewQuestion.length + 1
-    categoryNewQuestion.push(newQuestion)
+    // console.log(newQuestion)
+    // newQuestion.id = categoryNewQuestion.length + 1
+    questions.push(newQuestion)
     const updateFile = questions
 
     fs.writeFile(
@@ -121,26 +146,45 @@ app.post('/usernames', (req, res) => {
 })
 
 // PATCH
-app.patch('/questions/:category/:id', (req, res) => {
-  const category = req.params.category
-  const updateNewQuestions = questions[category]
-  const idToUpdate = Number(req.params.id)
+// app.patch('/questions/:category/:id', (req, res) => {
+//   // console.log(req.body)s
 
-  const question = updateNewQuestions.find((el) => el.id === idToUpdate)
+//   const category = req.params.category
+//   // const updateNewQuestions = questions[category]
+//   const categoryQuestions = questions.filter(question => question.category === category)
+//   if (categoryQuestions.length === 0) {
+//     res.status(404).send('Error: There is no category with that name')
+//   }
 
-  if (!question) {
-    return res.status(404).send({ Error: 'Question does not exist' })
-  } else {
-    try {
-      const updateQuestion = { ...req.body, id: idToUpdate }
-      const idx = updateNewQuestions.findIndex((el) => el.id === question.id)
-      updateNewQuestions[idx] = updateQuestion
-      res.send(updateQuestion)
-    } catch (err) {
-      res.status(400).send('Could not update it')
-    }
-  }
-})
+//   const idToUpdate = Number(req.params.id)
+//   // const question = categoryNewQuestions.find((el) => el.id === idToUpdate)
+//   let questionId = categoryQuestions[idToUpdate - 1]
+//   // console.log(questionId)
+//   if (!questionId) {
+//     return res.status(404).send({ Error: 'Question does not exist' })
+//     // ^ Question is acquired here
+
+//   } else {
+//     // try {
+//       // const updateQuestion = { ...req.body, id: idToUpdate }
+//     //   const idx = categoryNewQuestions.findIndex((el) => el.id === question.id)
+//     const updateObj = {...req.body}
+//     console.log(JSON.stringify(updateObj) + "line 172")
+//     // categoryQuestions[1] = updateObj
+//     // res.send(updateObj)
+//     // console.log(categoryQuestions)
+
+//     // const question = categoryNewQuestions.find(
+//     //   (el) => el.question === req.body.question
+//     // )
+//     //   categoryNewQuestions[idx] = updateQuestion
+//     //   res.send(updateQuestion)
+
+//     // } catch (err) {
+//       // res.status(400).send('Could not update it')
+//     }
+//    }
+// )
 
 // Delete
 
