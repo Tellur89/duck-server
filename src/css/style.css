@@ -18,3 +18,11 @@ h1 {
 ul {
   font-size: 20px;
 }
+
+a:hover {
+  color: white;
+}
+
+a {
+  color: gold;
+}
