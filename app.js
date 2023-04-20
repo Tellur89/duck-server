@@ -96,34 +96,26 @@ app.post('/questions/:category', (req, res) => {
 })
 
 
-app.post('/questions/:category', (req, res) => {
-  const category = req.params.category
-  const categoryNewQuestion = questions[category]
-  if (categoryNewQuestion === undefined) {
-    res.status(404).send('Error: There is no category with that name')
-  }
+app.post('/usernames', (req, res) => {
+  const newUserDetails = req.body
+  const newUsername = usernames.find(userid => userid.username ===req.body.username)
 
-  const question = categoryNewQuestion.find(
-    (el) => el.question === req.body.question
-  )
-
-  if (question !== undefined) {
-    res.status(409).send({ Error: 'Question already exist' })
+  if (newUsername !== undefined){
+    res.status(409).send({ Error: 'Username already exist' })
   } else {
-    const newQuestion = req.body
-    newQuestion.id = categoryNewQuestion.length + 1
-    categoryNewQuestion.push(newQuestion)
-    const updateFile = questions
+      console.log(newUserDetails)
+      usernames.push(newUserDetails)
+      const updateFile = usernames
 
-    fs.writeFile(
-      './src/json/questions.json',
-      JSON.stringify(updateFile),
-      () => {
-        console.log(JSON.stringify(newQuestion))
-      }
-    )
-    res.status(201).send(newQuestion)
-  }
+      fs.writeFile(
+        './src/json/usernames.json',
+        JSON.stringify(updateFile),
+        () => {
+          console.log(JSON.stringify(newUserDetails))
+        }
+      )
+      res.status(201).send(newUserDetails)
+    }
 })
 
 // PATCH
