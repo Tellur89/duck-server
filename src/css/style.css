@@ -1,0 +1,20 @@
+body {
+  background-image: url('/src/img/background.png');
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+ul {
+  font-size: 20px;
+}
