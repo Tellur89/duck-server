@@ -1,105 +1,112 @@
-{
-  "geography": [
-    {
+[
+  
+    { 
+      "category": "geography",
       "question": "What is the capital city of Canada?",
       "answer1": "Toronto",
       "answer2": "Montreal",
       "answer3": "Vancouver",
       "answer4": "Ottawa",
-      "ansIndex": 4,
-      "id": 1
+      "ansIndex": 4
     },
-    {
+    { 
+      "category": "geography",
       "question": "Which country is the largest in the world by area?",
       "answer1": "China",
       "answer2": "Russia",
       "answer3": "United States",
       "answer4": "Brazil",
-      "ansIndex": 2,
-      "id": 2
+      "ansIndex": 2
+      
     },
-    {
+    { 
+      "category": "geography",
       "question": "What is the highest mountain in Africa?",
       "answer1": "Mount Kilimanjaro",
       "answer2": "Mount Everest",
       "answer3": "Mount Aconcagua",
       "answer4": "Mount Fuji",
-      "ansIndex": 1,
-      "id": 3
+      "ansIndex": 1
+      
     },
-    {
+    { 
+      "category": "geography",
       "question": "Which country is both a continent and a country?",
       "answer1": "Australia",
       "answer2": "South Africa",
       "answer3": "Canada",
       "answer4": "Japan",
-      "ansIndex": 1,
-      "id": 4
+      "ansIndex": 1
+     
     },
-    {
+    { 
+      "category": "geography",
       "question": "What is the largest river in South America?",
       "answer1": "Amazon River",
       "answer2": "Nile River",
       "answer3": "Mississippi River",
       "answer4": "Yangtze River",
-      "ansIndex": 1,
-      "id": 5
+      "ansIndex": 1
+      
     },
-    {
+    { 
+      "category": "geography",
       "question": "Which ocean is the largest in the world?",
       "answer1": "Atlantic Ocean",
       "answer2": "Indian Ocean",
       "answer3": "Southern Ocean",
       "answer4": "Pacific Ocean",
-      "ansIndex": 4,
-      "id": 6
+      "ansIndex": 4
+      
     },
-    {
+    { 
+      "category": "geography",
       "question": "Which country is known as the Land of the Rising Sun?",
       "answer1": "China",
       "answer2": "South Korea",
       "answer3": "Japan",
       "answer4": "Taiwan",
-      "ansIndex": 3,
-      "id": 7
+      "ansIndex": 3
+      
     },
-    {
+    { 
+      "category": "geography",
       "question": "What is the capital city of Australia?",
       "answer1": "Sydney",
       "answer2": "Melbourne",
       "answer3": "Brisbane",
       "answer4": "Canberra",
-      "ansIndex": 4,
-      "id": 8
+      "ansIndex": 4
+  
     },
-    {
+    { 
+      "category": "geography",
       "question": "Which country is both in Europe and Asia?",
       "answer1": "Kazakhstan",
       "answer2": "Azerbaijan",
       "answer3": "Russia",
       "answer4": "Turkey",
-      "ansIndex": 4,
-      "id": 9
+      "ansIndex": 4
+  
     },
-    {
+    { 
+      "category": "geography",
       "question": "What is the currency of Japan?",
       "answer1": "Yen",
       "answer2": "Won",
       "answer3": "Peso",
       "answer4": "Euro",
-      "ansIndex": 1,
-      "id": 10
-    }
-  ],
-  "history": [
+      "ansIndex": 1
+    
+    },
     {
       "question": "Which of these was the first ancient civilization to develop writing?",
       "answer1": "Ancient Egypt",
       "answer2": "Mesopotamia",
       "answer3": "China",
       "answer4": "Indus Valley",
-      "ansIndex": 2,
-      "id": 1
+      "ansIndex": 2
+      
     },
     {
       "question": "What was the main cause of the American Civil War?",
@@ -107,8 +114,8 @@
       "answer2": "Slavery",
       "answer3": "Economic differences",
       "answer4": "Territorial expansion",
-      "ansIndex": 2,
-      "id": 2
+      "ansIndex": 2
+    
     },
     {
       "question": "Who was the first president of the United States?",
@@ -116,8 +123,8 @@
       "answer2": "George Washington",
       "answer3": "Thomas Jefferson",
       "answer4": "James Madison",
-      "ansIndex": 2,
-      "id": 3
+      "ansIndex": 2
+      
     },
     {
       "question": "Who led the Russian Revolution in 1917?",
@@ -125,8 +132,8 @@
       "answer2": "Joseph Stalin",
       "answer3": "Leon Trotsky",
       "answer4": "Nicholas II",
-      "ansIndex": 1,
-      "id": 4
+      "ansIndex": 1
+    
     },
     {
       "question": "Who was the first African American to become president of the United States?",
@@ -134,8 +141,8 @@
       "answer2": "Colin Powell",
       "answer3": "Condoleezza Rice",
       "answer4": "Jesse Jackson",
-      "ansIndex": 1,
-      "id": 5
+      "ansIndex": 1
+      
     },
     {
       "question": "Which country was the first to launch a satellite into space?",
@@ -143,8 +150,8 @@
       "answer2": "China",
       "answer3": "Russia",
       "answer4": "France",
-      "ansIndex": 3,
-      "id": 6
+      "ansIndex": 3
+      
     },
     {
       "question": "Which famous scientist is known for developing the theory of relativity?",
@@ -152,8 +159,8 @@
       "answer2": "Albert Einstein",
       "answer3": "Galileo Galilei",
       "answer4": "Charles Darwin",
-      "ansIndex": 2,
-      "id": 7
+      "ansIndex": 2
+      
     },
     {
       "question": "Which of the following was a major cause of World War II?",
@@ -161,8 +168,8 @@
       "answer2": "The Industrial Revolution",
       "answer3": "The Space Race",
       "answer4": "The Treaty of Versailles",
-      "ansIndex": 4,
-      "id": 8
+      "ansIndex": 4
+      
     },
     {
       "question": "Which country did Christopher Columbus set sail from in 1492?",
@@ -170,8 +177,8 @@
       "answer2": "Portugal",
       "answer3": "Italy",
       "answer4": "England",
-      "ansIndex": 1,
-      "id": 9
+      "ansIndex": 1
+  
     },
     {
       "question": "Which famous battle took place in 1066 and led to the Norman conquest of England?",
@@ -179,8 +186,8 @@
       "answer2": "Battle of Hastings",
       "answer3": "Battle of Agincourt",
       "answer4": "Battle of Yorktown",
-      "ansIndex": 2,
-      "id": 10
+      "ansIndex": 2
+  
     }
-  ]
-}
+  
+]
