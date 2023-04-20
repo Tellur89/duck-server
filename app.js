@@ -148,7 +148,7 @@ app.delete('/questions/:category/:id', (req, res) => {
   const idToDelete = parseInt(req.params.id)
 
   const deleteID = deleteCategories.find((item) => item.id === idToDelete)
-
+  
   if (!deleteID) {
     res.status(404).send({ message: 'Question not found in the category' })
   } else {
