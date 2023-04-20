@@ -1,5 +1,6 @@
 [
-    { "username": "boffin", "score": 20 },
-    { "username": "duck", "score": 15},
-    { "username": "swan", "score": 5}
+    { "username": "tom", "score": 20, "status": "admin" },
+    { "username": "dohee", "score": 15, "status": "user"},
+    { "username": "becki", "score": 5, "status": "admin"},
+    { "username": "yaaseen", "score": 5, "status": "user"}
 ]
