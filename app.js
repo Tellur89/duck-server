@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const questions = require('./src/json/questions.json')
+const usernames = require("./src/json/usernames.json")
 const logger = require('./src/js/functions/logger')
 const fs = require('fs')
 
@@ -19,6 +20,10 @@ app.get('/', (req, res) => {
 
 app.get('/questions', (req, res) => {
   res.send(questions)
+})
+
+app.get('/usernames', (req, res) => {
+  res.send(usernames)
 })
 
 app.get('/questions/:category', (req, res) => {
