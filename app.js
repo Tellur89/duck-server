@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const questions = require('./src/json/questions.json')
-const usernames = require("./src/json/usernames.json")
+const usernames = require('./src/json/usernames.json')
 const logger = require('./src/js/functions/logger')
 const fs = require('fs')
 
@@ -39,14 +39,15 @@ app.get('/questions/:category', (req, res) => {
 
 app.get('/usernames/:username', (req, res) => {
   const username = req.params.username
-  const user = usernames.find(userid => userid.username === username)
+  const user = usernames.find((userid) => userid.username === username)
   console.log(user)
-  
-  if (user === undefined) {
-    res.status(404).send("Error: Username not found")
-  } else {res.send(user)}
-})
 
+  if (user === undefined) {
+    res.status(404).send('Error: Username not found')
+  } else {
+    res.send(user)
+  }
+})
 
 app.get('/questions/:category/:id', (req, res) => {
   const category = req.params.category
@@ -95,27 +96,28 @@ app.post('/questions/:category', (req, res) => {
   }
 })
 
-
 app.post('/usernames', (req, res) => {
   const newUserDetails = req.body
-  const newUsername = usernames.find(userid => userid.username ===req.body.username)
+  const newUsername = usernames.find(
+    (userid) => userid.username === req.body.username
+  )
 
-  if (newUsername !== undefined){
+  if (newUsername !== undefined) {
     res.status(409).send({ Error: 'Username already exist' })
   } else {
-      console.log(newUserDetails)
-      usernames.push(newUserDetails)
-      const updateFile = usernames
+    console.log(newUserDetails)
+    usernames.push(newUserDetails)
+    const updateFile = usernames
 
-      fs.writeFile(
-        './src/json/usernames.json',
-        JSON.stringify(updateFile),
-        () => {
-          console.log(JSON.stringify(newUserDetails))
-        }
-      )
-      res.status(201).send(newUserDetails)
-    }
+    fs.writeFile(
+      './src/json/usernames.json',
+      JSON.stringify(updateFile),
+      () => {
+        console.log(JSON.stringify(newUserDetails))
+      }
+    )
+    res.status(201).send(newUserDetails)
+  }
 })
 
 // PATCH
@@ -153,7 +155,15 @@ app.delete('/questions/:category/:id', (req, res) => {
     res.status(404).send({ message: 'Question not found in the category' })
   } else {
     const indexToDelete = deleteCategories.indexOf(deleteID)
+    const updatedFile = questions
     deleteCategories.splice(indexToDelete, 1)
+    fs.writeFile(
+      './src/json/usernames.json',
+      JSON.stringify(updatedFile),
+      () => {
+        console.log(JSON.stringify(deleteCategories))
+      }
+    )
     res.status(204).send()
   }
 })

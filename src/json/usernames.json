@@ -1,6 +1,6 @@
 [
-    { "username": "tom", "score": 20, "status": "admin" },
-    { "username": "dohee", "score": 15, "status": "user"},
-    { "username": "becki", "score": 5, "status": "admin"},
-    { "username": "yaaseen", "score": 5, "status": "user"}
+  { "username": "tom", "score": 20, "status": "admin" },
+  { "username": "dohee", "score": 15, "status": "user" },
+  { "username": "becki", "score": 5, "status": "admin" },
+  { "username": "yaaseen", "score": 5, "status": "user" }
 ]
