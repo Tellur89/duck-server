@@ -88,12 +88,16 @@ app.get('/questions/:category/:id', (req, res) => {
 // POST
 app.post('/questions/:category', (req, res) => {
   const category = req.params.category
-  const categoryNewQuestion = questions[category]
-  if (categoryNewQuestion === undefined) {
+  // const categoryNewQuestion = questions[category]
+  // if (categoryNewQuestion === undefined) {
+  //   res.status(404).send('Error: There is no category with that name')
+  // }
+  const categoryNewQuestions = questions.filter(question => question.category === category)
+  if (categoryNewQuestions.length === 0) {
     res.status(404).send('Error: There is no category with that name')
   }
 
-  const question = categoryNewQuestion.find(
+  const question = categoryNewQuestions.find(
     (el) => el.question === req.body.question
   )
 
@@ -101,8 +105,9 @@ app.post('/questions/:category', (req, res) => {
     res.status(409).send({ Error: 'Question already exist' })
   } else {
     const newQuestion = req.body
-    newQuestion.id = categoryNewQuestion.length + 1
-    categoryNewQuestion.push(newQuestion)
+    console.log(newQuestion)
+    // newQuestion.id = categoryNewQuestion.length + 1
+    questions.push(newQuestion)
     const updateFile = questions
 
     fs.writeFile(
