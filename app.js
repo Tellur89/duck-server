@@ -105,7 +105,7 @@ app.post('/questions/:category', (req, res) => {
     res.status(409).send({ Error: 'Question already exist' })
   } else {
     const newQuestion = req.body
-    console.log(newQuestion)
+    // console.log(newQuestion)
     // newQuestion.id = categoryNewQuestion.length + 1
     questions.push(newQuestion)
     const updateFile = questions
@@ -146,26 +146,45 @@ app.post('/usernames', (req, res) => {
 })
 
 // PATCH
-app.patch('/questions/:category/:id', (req, res) => {
-  const category = req.params.category
-  const updateNewQuestions = questions[category]
-  const idToUpdate = Number(req.params.id)
+// app.patch('/questions/:category/:id', (req, res) => {
+//   // console.log(req.body)s
 
-  const question = updateNewQuestions.find((el) => el.id === idToUpdate)
+//   const category = req.params.category
+//   // const updateNewQuestions = questions[category]
+//   const categoryQuestions = questions.filter(question => question.category === category)
+//   if (categoryQuestions.length === 0) {
+//     res.status(404).send('Error: There is no category with that name')
+//   }
 
-  if (!question) {
-    return res.status(404).send({ Error: 'Question does not exist' })
-  } else {
-    try {
-      const updateQuestion = { ...req.body, id: idToUpdate }
-      const idx = updateNewQuestions.findIndex((el) => el.id === question.id)
-      updateNewQuestions[idx] = updateQuestion
-      res.send(updateQuestion)
-    } catch (err) {
-      res.status(400).send('Could not update it')
-    }
-  }
-})
+//   const idToUpdate = Number(req.params.id)
+//   // const question = categoryNewQuestions.find((el) => el.id === idToUpdate)
+//   let questionId = categoryQuestions[idToUpdate - 1]
+//   // console.log(questionId)
+//   if (!questionId) {
+//     return res.status(404).send({ Error: 'Question does not exist' })
+//     // ^ Question is acquired here
+
+//   } else {
+//     // try {
+//       // const updateQuestion = { ...req.body, id: idToUpdate }
+//     //   const idx = categoryNewQuestions.findIndex((el) => el.id === question.id)
+//     const updateObj = {...req.body}
+//     console.log(JSON.stringify(updateObj) + "line 172")
+//     // categoryQuestions[1] = updateObj
+//     // res.send(updateObj)
+//     // console.log(categoryQuestions)
+
+//     // const question = categoryNewQuestions.find(
+//     //   (el) => el.question === req.body.question
+//     // )
+//     //   categoryNewQuestions[idx] = updateQuestion
+//     //   res.send(updateQuestion)
+
+//     // } catch (err) {
+//       // res.status(400).send('Could not update it')
+//     }
+//    }
+// )
 
 // Delete
 
