@@ -37,6 +37,28 @@ app.get('/questions/:category', (req, res) => {
   }
 })
 
+app.get('/usernames/:username', (req, res) => {
+  const username = req.params.username
+  // const enteredUsername = usernames[username]
+  let usernamesList = usernames.map(users => users.username)
+  console.log(usernamesList)
+  
+  for(i=0; i < usernamesList.length;i++){
+    if (usernamesList[i] === username){
+      res.send(usernames[i])
+    } 
+  } 
+
+
+
+  // if (enteredUsername === undefined) {
+  //   res.status(404).send('Error: There is no username with that name')
+  // } else {
+  //   res.send(enteredUsername)
+  // }
+})
+
+
 app.get('/questions/:category/:id', (req, res) => {
   const category = req.params.category
   const questionCategory = questions[category]
