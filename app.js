@@ -29,20 +29,17 @@ app.get('/usernames', (req, res) => {
 app.get('/questions/:category', (req, res) => {
   const category = req.params.category
   // const questionCategory = questions[category]
-  const categoryQuestions = questions.forEach(question => printCategory(question,category))
-  // console.log(categoryQuestions)
   // if (questionCategory === undefined) {
   //   res.status(404).send('Error: There is no category with that name')
   // } else {
   //   res.send(questionCategory)
   // }
+  // const categoryQuestions = questions.forEach(question => printCategory(question,category))
+  const categoryQuestions = questions.filter(question => question.category === category)
+  console.log(categoryQuestions)
+  res.send(categoryQuestions)
 })
 
-function printCategory(question,category) {
-  if (question.category === category){
-    console.log(question)
-  }
-}
 
 app.get('/usernames/:username', (req, res) => {
   const username = req.params.username
