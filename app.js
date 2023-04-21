@@ -4,18 +4,20 @@ const questions = require('./src/json/questions.json')
 const usernames = require('./src/json/usernames.json')
 const logger = require('./src/js/functions/logger')
 const fs = require('fs')
-
+const path = require("path")
 const app = express()
 
 // MIDDLEWARE
 app.use(cors())
+app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.json())
 app.use(logger)
 // ------
 
 // GET
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile(__dirname + '/src/index.html')
+
 })
 
 app.get('/questions', (req, res) => {
@@ -146,46 +148,46 @@ app.post('/usernames', (req, res) => {
 })
 
 // PATCH
-app.patch('/questions/:category/:id', (req, res) => {
-  // console.log(req.body)
-  // const updateNewQuestions = questions[category]
-  const category = req.params.category
+// app.patch('/questions/:category/:id', (req, res) => {
+//   // console.log(req.body)
+//   // const updateNewQuestions = questions[category]
+//   const category = req.params.category
   
-  const categoryQuestions = questions.filter(question => question.category === category)
-  if (categoryQuestions.length === 0) {
-    res.status(404).send('Error: There is no category with that name')
-  }
+//   const categoryQuestions = questions.filter(question => question.category === category)
+//   if (categoryQuestions.length === 0) {
+//     res.status(404).send('Error: There is no category with that name')
+//   }
 
-  const idToUpdate = Number(req.params.id)
-  let questionId = categoryQuestions[idToUpdate - 1]
-  // const question = categoryNewQuestions.find((el) => el.id === idToUpdate)
-  // console.log(questionId)
-  if (!questionId) {
-    return res.status(404).send({ Error: 'Question does not exist' })
-    // ^ Question is acquired here
+//   const idToUpdate = Number(req.params.id)
+//   let questionId = categoryQuestions[idToUpdate - 1]
+//   // const question = categoryNewQuestions.find((el) => el.id === idToUpdate)
+//   // console.log(questionId)
+//   if (!questionId) {
+//     return res.status(404).send({ Error: 'Question does not exist' })
+//     // ^ Question is acquired here
 
-  } else {
-    const updateObj = {...req.body, id: idToUpdate}
-    console.log(updateObj)
-    // try {
-      // const updateQuestion = { ...req.body, id: idToUpdate }
-    //   const idx = categoryNewQuestions.findIndex((el) => el.id === question.id)
+//   } else {
+//     const updateObj = {...req.body, id: idToUpdate}
+//     console.log(updateObj)
+//     // try {
+//       // const updateQuestion = { ...req.body, id: idToUpdate }
+//     //   const idx = categoryNewQuestions.findIndex((el) => el.id === question.id)
     
-    // categoryQuestions[1] = updateObj
-    // res.send(updateObj)
-    // console.log(categoryQuestions)
+//     // categoryQuestions[1] = updateObj
+//     // res.send(updateObj)
+//     // console.log(categoryQuestions)
 
-    // const question = categoryNewQuestions.find(
-    //   (el) => el.question === req.body.question
-    // )
-    //   categoryNewQuestions[idx] = updateQuestion
-    //   res.send(updateQuestion)
+//     // const question = categoryNewQuestions.find(
+//     //   (el) => el.question === req.body.question
+//     // )
+//     //   categoryNewQuestions[idx] = updateQuestion
+//     //   res.send(updateQuestion)
 
-    // } catch (err) {
-      // res.status(400).send('Could not update it')
-    }
-   }
-)
+//     // } catch (err) {
+//       // res.status(400).send('Could not update it')
+//     }
+//    }
+// )
 
 // Delete
 
