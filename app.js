@@ -4,18 +4,20 @@ const questions = require('./src/json/questions.json')
 const usernames = require('./src/json/usernames.json')
 const logger = require('./src/js/functions/logger')
 const fs = require('fs')
-
+const path = require("path")
 const app = express()
 
 // MIDDLEWARE
 app.use(cors())
+app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.json())
 app.use(logger)
 // ------
 
 // GET
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile(__dirname + '/src/index.html')
+
 })
 
 app.get('/questions', (req, res) => {
@@ -147,29 +149,30 @@ app.post('/usernames', (req, res) => {
 
 // PATCH
 // app.patch('/questions/:category/:id', (req, res) => {
-//   // console.log(req.body)s
-
-//   const category = req.params.category
+//   // console.log(req.body)
 //   // const updateNewQuestions = questions[category]
+//   const category = req.params.category
+  
 //   const categoryQuestions = questions.filter(question => question.category === category)
 //   if (categoryQuestions.length === 0) {
 //     res.status(404).send('Error: There is no category with that name')
 //   }
 
 //   const idToUpdate = Number(req.params.id)
-//   // const question = categoryNewQuestions.find((el) => el.id === idToUpdate)
 //   let questionId = categoryQuestions[idToUpdate - 1]
+//   // const question = categoryNewQuestions.find((el) => el.id === idToUpdate)
 //   // console.log(questionId)
 //   if (!questionId) {
 //     return res.status(404).send({ Error: 'Question does not exist' })
 //     // ^ Question is acquired here
 
 //   } else {
+//     const updateObj = {...req.body, id: idToUpdate}
+//     console.log(updateObj)
 //     // try {
 //       // const updateQuestion = { ...req.body, id: idToUpdate }
 //     //   const idx = categoryNewQuestions.findIndex((el) => el.id === question.id)
-//     const updateObj = {...req.body}
-//     console.log(JSON.stringify(updateObj) + "line 172")
+    
 //     // categoryQuestions[1] = updateObj
 //     // res.send(updateObj)
 //     // console.log(categoryQuestions)
@@ -188,28 +191,35 @@ app.post('/usernames', (req, res) => {
 
 // Delete
 
-app.delete('/questions/:category/:id', (req, res) => {
-  const category = req.params.category
-  const deleteCategories = questions[category]
-  const idToDelete = parseInt(req.params.id)
-
-  const deleteID = deleteCategories.find((item) => item.id === idToDelete)
+// app.delete('/questions/:category/:id', (req, res) => {
+//   const category = req.params.category
+//   // const deleteCategories = questions[category]
+//   const deleteCategories = questions.filter(question => question.category === category)
+//   const idToDelete = Number(req.params.id-1)
   
-  if (!deleteID) {
-    res.status(404).send({ message: 'Question not found in the category' })
-  } else {
-    const indexToDelete = deleteCategories.indexOf(deleteID)
-    const updatedFile = questions
-    deleteCategories.splice(indexToDelete, 1)
-    fs.writeFile(
-      './src/json/usernames.json',
-      JSON.stringify(updatedFile),
-      () => {
-        console.log(JSON.stringify(deleteCategories))
-      }
-    )
-    res.status(204).send()
-  }
-})
+//   if (deleteCategories[idToDelete] === undefined){
+//     res.status(404).send({ message: 'Question not found in the category' })
+//   } else {
+//     deleteCategories.splice(idToDelete,1)
+//     console.log(questions)
+//   }
+//   // const deleteID = deleteCategories.find((item) => indexOf(item) === idToDelete)
+  
+//   // if (!deleteID) {
+//   //   res.status(404).send({ message: 'Question not found in the category' })
+//   // } else {
+//   //   const indexToDelete = deleteCategories.indexOf(deleteID)
+//   //   const updatedFile = questions
+//   //   deleteCategories.splice(indexToDelete, 1)
+//   //   fs.writeFile(
+//   //     './src/json/usernames.json',
+//   //     JSON.stringify(updatedFile),
+//   //     () => {
+//   //       console.log(JSON.stringify(deleteCategories))
+//   //     }
+//   //   )
+//   //   res.status(204).send()
+//   // }
+// })
 
 module.exports = app
